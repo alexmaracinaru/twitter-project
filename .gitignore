@@ -1,0 +1,5 @@
+tailwindcss/node_modules/
+lib/
+include/
+bin/
+__pycache__/

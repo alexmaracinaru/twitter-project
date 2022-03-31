@@ -1,0 +1,79 @@
+% include("header", title="Signup")
+
+<main class="wrapper">
+  <div class="form_wrapper">
+    <img class="hexagon_3d absolute" src="/3dhexagon.svg" alt="" />
+    <img
+      class="circle_3d w-40 absolute -bottom-10 z-10"
+      src="/3dcircle.svg"
+      alt=""
+    />
+    <img class="chat_bubble w-40 z-10 absolute" src="/chatty.png" alt="" />
+
+    <form class="form p-6" action="/signup" method="post">
+      <h1 class="form_heading title is-1">Create your account</h1>
+      <div class="field">
+        <div class="control">
+          <input
+            class="input"
+            name="first_name"
+            type="text"
+            placeholder="John"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input class="input" name="last_name" type="text" placeholder="Doe" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input
+            class="input"
+            name="username"
+            type="text"
+            placeholder="myusername"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input
+            class="input"
+            name="user_email"
+            type="text"
+            placeholder="johndoe@email.com"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input
+            class="input"
+            name="user_password"
+            type="password"
+            placeholder="Password"
+          />
+        </div>
+      </div>
+      <div class="field button_checkbox">
+        <div class="control">
+          <button class="fancy_button">Sign up</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="login_container text-center pt-4">
+    <span class="login_question m-auto text-center"
+      >Do you already have an account?</span
+    >
+    <a class="login_here" href="/login">Login here</a>
+  </div>
+</main>
+
+% include ("footer")

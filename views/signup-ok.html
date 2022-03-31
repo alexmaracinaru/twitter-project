@@ -1,0 +1,22 @@
+% include("header", title="Successful Signup")
+
+<main class="wrapper">
+  <div class="card card-ok p-6 text-center">
+    <div class="form_heading title is-2 space">
+      Welcome, {{first_name}}! We wish you happy posting.
+    </div>
+    <div class="is-subtitle space">
+      You signed up with the username:
+      <strong>{{username}}</strong> <br />
+      and with the email <strong>{{user_email}}</strong>
+    </div>
+  </div>
+  <div class="login_container text-center p-4">
+    <span class="login_question"
+      >Are you ready to see or post what's happening?</span
+    >
+    <a class="login_here" href="/login">Go to login</a>
+  </div>
+</main>
+
+% include("footer")

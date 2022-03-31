@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/app.css" />
+    <link rel="stylesheet" href="/tailwind.css" />
+    <title>{{ get("title", "upps...") }}</title>
+  </head>
+  <body>
+    <header class="flex justify-between items-center p-7">
+      <a href="/signup">
+        <img class="logo" src="/logo.svg" alt="black hexagon"
+      /></a>
+      <nav class="flex items-center">
+        <a class="nav_link p-2" href="/posts">Posts</a>
+        <a class="nav_link p-2" href="/users">Users</a>
+        % if get("user", False):
+        <div class="user_logout flex items-center p-2 ">
+          <span class="user_greeting is-5 pr-2">
+            Hi, {{ user["first_name"] }}!
+          </span>
+          <figure class="image is-48x48">
+            <img class="pr-2" src="/userpic.png" alt="Placeholder image" />
+          </figure>
+          <a class="button signup_btn" href="/logout">Log out</a>
+        </div>
+        % else:
+        <a class="button signup_btn" href="/signup">Sign up</a>
+        <a class="button login_btn ml-2" href="/login">Login</a>
+        % end
+      </nav>
+    </header>

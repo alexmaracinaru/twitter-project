@@ -1,0 +1,36 @@
+%include ("header", title = "Users")
+
+<main class="wrapper max-w-screen-2xl">
+  % if not users:
+  <div>Sorry, no users to show.</div>
+
+  % end
+
+  <div id="users" class="cards grid grid-cols-3">
+    % for user in users:
+    <div class="user card p-6 m-3">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="/userpic.png" alt="Placeholder image" />
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">
+              {{ user["first_name"] }}<br />{{ user["last_name"] }}
+            </p>
+            <p class="subtitle is-6">@{{user["username"]}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer flex flex-col pt-4">
+        <div class="subtitle is-6">Email: {{ user["user_email"] }}</div>
+        <span class="tag is-link is-light">User ID: {{ user["user_id"] }}</span>
+      </div>
+    </div>
+
+    % end
+  </div>
+</main>
+%include("footer")

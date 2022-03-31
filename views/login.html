@@ -1,0 +1,50 @@
+% include("header", title="Login")
+
+<main class="wrapper">
+  <div class="form_wrapper">
+    <img class="circles_green absolute" src="circles.png" alt="" />
+    <img class="square_3d absolute z-10" src="square.png"" alt="" />
+
+    <form action="/login" method="post" class="form p-6 form_login">
+      <h1 class="form_heading title is-1">
+        Welcome back! Login to your account
+      </h1>
+      <div class="field">
+        <div class="control">
+          <input
+            class="input"
+            name="username"
+            type="text"
+            placeholder="Username"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input
+            class="input"
+            name="user_password"
+            type="password"
+            placeholder="Password"
+          />
+        </div>
+      </div>
+      <div class="field button_checkbox flex justify-between items-center">
+        <div class="control">
+          <button class="fancy_button">Login</button>
+        </div>
+        <label class="checkbox">
+          <input type="checkbox" />
+          <span>Remember me</span>
+        </label>
+      </div>
+    </form>
+  </div>
+  <div class="login_container text-center pt-4">
+    <span class="login_question">You don't have an account?</span>
+    <a class="login_here" href="/signup">Register here</a>
+  </div>
+</main>
+
+% include ("footer")

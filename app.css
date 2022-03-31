@@ -1,0 +1,191 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+body {
+  min-height: 100vh;
+  background: ghostwhite;
+}
+
+:root {
+  --purps: #662ad2;
+  --lightpurps: #eff1fa;
+  --border: #dadaed;
+  --border-hover: #c1c1df;
+  --text-color: #a8a8c0;
+}
+
+/* ----------------------------- HEADER ------------------------------------ */
+
+.logo {
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  width: 110px;
+}
+.logo:hover {
+  transform: scale(0.95);
+}
+.nav_link {
+  color: var(--purps);
+  font-weight: 700;
+}
+.signup_btn {
+  border: none;
+  background: var(--purps);
+  color: #eff1fa;
+  font-weight: 700;
+  transition: all 0.3s;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 15px;
+}
+.signup_btn:hover {
+  background: var(--lightpurps);
+  border: 1px solid var(--border-hover);
+}
+
+.login_btn {
+  background: var(--lightpurps);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 15px;
+}
+.login_btn:hover {
+  border: 1px solid var(--border-hover);
+}
+
+/* ----------------------------- Absolute Elements ------------------------------------ */
+
+.hexagon_3d {
+  max-width: 400px;
+  right: -16vw;
+}
+.chat_bubble {
+  right: 27vw;
+  top: -4vw;
+}
+.circle_3d {
+  right: 29vw;
+}
+.square_3d {
+  right: 22vw;
+  max-width: 200px;
+}
+.circles_green {
+  max-width: 300px;
+  right: -16vw;
+  top: 19vh;
+}
+.ellipse {
+  max-width: 800px;
+  right: 1vw;
+  top: 17vh;
+}
+
+/* ----------------------------- Form + Wrapper  ------------------------------------ */
+
+.wrapper {
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+}
+
+.form_wrapper {
+  max-width: 450px;
+  margin: auto;
+  position: relative;
+}
+.form,
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 5px 57px rgba(74, 97, 233, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  margin: auto;
+  margin-top: 30px;
+}
+.input {
+  border: 1px solid #dadaed;
+  color: var(--text-color);
+  background: none;
+}
+.input:hover {
+  border: 1px solid #c1c1df;
+}
+
+.main_posts {
+  max-width: 900px;
+}
+
+.form_heading {
+  background: -webkit-linear-gradient(60deg, var(--purps), #61c5b7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fancy_button {
+  background: linear-gradient(-45deg, #3f00b5, #9f69fe, #27c8b7, #3f00b5);
+  background-size: 800% 400%;
+  padding: 1em 2em;
+  display: inline-block;
+  border: none;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  transition: all 0.5s ease-in-out;
+  animation: gradient 10s infinite cubic-bezier(0.62, 0.28, 0.23, 0.99) both;
+}
+
+button:hover {
+  animation: gradient 3s infinite;
+  transform: scale(1.05);
+}
+
+button:active {
+  animation: gradient 3s infinite;
+  transform: scale(0.8);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.login_here {
+  color: #662ad2;
+}
+
+.login_here {
+  font-weight: 700;
+}
+.textarea {
+  box-shadow: none;
+}
+
+button svg,
+a svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 7px;
+}
+
+.separator {
+  border-top: 1px solid var(--border);
+}
+.tweet {
+  color: var(--text-color);
+}
+.edit_delete {
+  margin-left: auto;
+}
