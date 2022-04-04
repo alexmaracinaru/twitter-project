@@ -19,6 +19,6 @@ def _():
 
     for user in globals.USERS:
         if user["user_id"] == user_id:
-            return dict(posts=globals.POSTS, user=user)
+            return dict(posts=globals.POSTS, user=user, tabs=globals.TABS, items=globals.ITEMS, trends=globals.TRENDS, people=globals.PEOPLE, tweets=globals.TWEETS)
 
     return redirect('/login')

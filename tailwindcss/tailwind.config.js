@@ -17,6 +17,7 @@ module.exports = {
         border_hover: "#c1c1df",
         border: "#dadaed",
         username_color: "#BCBCBC",
+        on_hover: "#E8EBF8",
       },
     },
   },

@@ -1,93 +1,182 @@
-% include ("header", title="Posts")
-% import datetime, timeago
+% include ("header", title="Posts") 
+% import datetime, timeago 
 % now = datetime.datetime.now()
 
-<main class="main_posts m-auto">
-  <form class="form form_posts p-8 mt-0 relative z-10" action="/posts" method="post">
-    <div class="media flex flex-row">
-      <div class="media-left">
-        <figure class="image is-48x48">
-          <img src="/userpic.png" alt="Placeholder image"/>
-        </figure>
+<main class="main-container w-full mx-auto">
+  <div class="pl-6">
+    <div class="fixed h-screen px-1 lg:px-6 flex flex-col">
+      <div class="">
+        <!-- ? ///////////////////////// LEFT SIDE ////////////////////////////// -->
+        <div class="">
+          % for tab in tabs:
+          <div class="mb-5">
+            <a class="text-xl hover:bg-lightpurps rounded-md py-2 px-4" href="">
+              <i class="{{tab['icon']}} text-purps"></i>
+              <span class="ml-2 hidden md:inline">{{tab['title']}}</span>
+            </a>
+          </div>
+          % end
+        </div>
+        <button
+          onclick="toggleTweetModal()"
+          class="mt-8 w-10/12 py-2 text-lg text-white bg-blue1 fancy_button"
+        >
+          Tweet
+        </button>
       </div>
-     <div class="w-full">
-      <textarea
-      name="tweet"
-      type="textarea"
-      class="textarea bg-transparent border-none"
-      rows="2"
-      placeholder="Write something..."
-    ></textarea>
-     </div>
+      <div class="mt-44 relative z-10">
+        <div
+          class="flex items-center gap-2 px-2 py-3 hover:bg-lightpurps cursor-pointer rounded-full"
+        >
+          <img class="w-12 h-12 rounded-full flex-none" src="/images/3.jpg" />
+          <div class="flex-1 overflow-ellipsis">
+            <p>Alexandra Maracinaru</p>
+            <p class="font-thin">@badget</p>
+          </div>
+          <button class="more_btn bg-white">...</button>
+        </div>
+      </div>
     </div>
-    <div class="separator mt-4"></div>
-    <button class="fancy_button flex ml-auto mt-5 cursor-pointer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path fill="none" d="M0 0h24v24H0z" />
-        <path
-          fill="currentColor"
-          d="M6.94 14.036c-.233.624-.43 1.2-.606 1.783.96-.697 2.101-1.139 3.418-1.304 2.513-.314 4.746-1.973 5.876-4.058l-1.456-1.455 1.413-1.415 1-1.001c.43-.43.915-1.224 1.428-2.368-5.593.867-9.018 4.292-11.074 9.818zM17 9.001L18 10c-1 3-4 6-8 6.5-2.669.334-4.336 2.167-5.002 5.5H3C4 16 6 2 21 2c-1 2.997-1.998 4.996-2.997 5.997L17 9.001z"
-        />
-      </svg>
-      Post
-    </button>
-  </form>
-  <img class="ellipse absolute" src="Ellipse20.png" alt=""/>
-
-  % if not posts:
-  <div class="no_posts subtitle is-5 p-4">
-    <strong>Sorry, you have no posts to show.</strong>
   </div>
-  % end
-
-  <div id="posts" class="form form_posts p-6 mt-2">
-    % for post in posts:
-
-    <div class="media">
-      <div class="media-left">
-        <figure class="image is-48x48">
-          <img src="/userpic.png" alt="Placeholder image" />
-        </figure>
+  <!-- ? //////////////////////////////////  CENTER  /////////////////////////////////////// -->
+  <div class="form_container">
+    <form
+      class="form form-posts p-8 mt-0 relative z-10"
+      action="/posts"
+      method="post"
+    >
+      <div class="media flex flex-row">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img src="/userpic.png" alt="Placeholder image" />
+          </figure>
+        </div>
+        <div class="w-full">
+          <textarea
+            name="tweet"
+            type="textarea"
+            class="textarea bg-transparent border-none"
+            rows="2"
+            placeholder="Write something..."
+          ></textarea>
+        </div>
       </div>
-      <div class="media-content">
-        <p class="title is-6 text-purps">
-          {{ post["first_name"] }} {{ post["last_name"] }}
-        </p>
-        <p class="subtitle is-6 text-username_color">@{{post["username"]}}</p>
-      </div>
-      <span class="tag is-link is-light"
-        >{{ timeago.format(post["createdAt"], now) }}</span
-      >
-    </div>
-    <p class="tweet subtitle is-6 pl-6 pt-2">{{ post["tweet"] }}</p>
-    <div class="post edit_delete flex justify-end">
-      <a href="/edit/{{ post['post_id'] }}" class="edit_delete_btn">
+      <div class="separator mt-4"></div>
+      <button class="fancy_button flex ml-auto mt-5 cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path fill="none" d="M0 0h24v24H0z" />
           <path
             fill="currentColor"
-            d="M6.414 16L16.556 5.858l-1.414-1.414L5 14.586V16h1.414zm.829 2H3v-4.243L14.435 2.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 18zM3 20h18v2H3v-2z"
+            d="M6.94 14.036c-.233.624-.43 1.2-.606 1.783.96-.697 2.101-1.139 3.418-1.304 2.513-.314 4.746-1.973 5.876-4.058l-1.456-1.455 1.413-1.415 1-1.001c.43-.43.915-1.224 1.428-2.368-5.593.867-9.018 4.292-11.074 9.818zM17 9.001L18 10c-1 3-4 6-8 6.5-2.669.334-4.336 2.167-5.002 5.5H3C4 16 6 2 21 2c-1 2.997-1.998 4.996-2.997 5.997L17 9.001z"
           />
         </svg>
-      </a>
-      <form action="/delete-post" method="POST">
-        <input name="post_id" type="hidden" value='{{ post["post_id"] }}' />
-        <div>
-          <button class="edit_delete_btn">
+        Post
+      </button>
+    </form>
+    <!-- <img class="ellipse absolute" src="Ellipse20.png" alt=""/> -->
+
+    % if not posts:
+    <div class="no_posts subtitle is-5 p-4">
+      <strong>Sorry, you have no posts to show.</strong>
+    </div>
+    % end
+    <div id="posts" class="form form_posts p-6 mt-2">
+      % for post in posts:
+      <div class="post">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="/userpic.png" alt="Placeholder image" />
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-6 text-purps">
+              {{ post["first_name"] }} {{ post["last_name"] }}
+            </p>
+            <p class="subtitle is-6 text-username_color">
+              @{{post["username"]}}
+            </p>
+          </div>
+          <span class="tag is-link is-light"
+            >{{ timeago.format(post["createdAt"], now) }}</span
+          >
+        </div>
+        <p class="tweet subtitle is-6 pl-6 pt-2">{{ post["tweet"] }}</p>
+        <div class="post edit_delete flex justify-end">
+          <a href="/edit/{{ post['post_id'] }}" class="edit_delete_btn">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path fill="none" d="M0 0h24v24H0z" />
               <path
                 fill="currentColor"
-                d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zM9 4v2h6V4H9z"
+                d="M6.414 16L16.556 5.858l-1.414-1.414L5 14.586V16h1.414zm.829 2H3v-4.243L14.435 2.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 18zM3 20h18v2H3v-2z"
               />
             </svg>
-          </button>
+          </a>
+          <form action="/delete-post" method="POST">
+            <input name="post_id" type="hidden" value='{{ post["post_id"] }}' />
+            <div>
+              <button class="edit_delete_btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path fill="none" d="M0 0h24v24H0z" />
+                  <path
+                    fill="currentColor"
+                    d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zM9 4v2h6V4H9z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
+      % end
+      
+      <div class="separator"></div>
     </div>
-    <div class="separator"></div>
+  </div>
+  <!-- ? /////////////////////////////// RIGHT SIDE //////////////////////////////////// -->
 
-    % end
+  <div class="h-screen hidden lg:block">
+    <div class="fixed flex flex-col h-screen gap-4 pl-2">
+      <!--  /////////////////////////////// TRENDS //////////////////////////////////// -->
+      <div class="h-1/2 flex-grow bg-lightpurps rounded overflow-hidden">
+        <div class="pl-4 pt-4 font-bold text-xl">Trends for you</div>
+        % for trend in trends:
+        <div
+          class="flex justify-between px-4 py-2 hover:bg-on_hover cursor-pointer"
+        >
+          <div>
+            <p class="font-thin">{{trend["category"]}}</p>
+            <p class="font-bold">{{trend["title"]}}</p>
+            <p class="font-thin">{{trend["tweets_counter"]}} tweets</p>
+          </div>
+          <div>...</div>
+        </div>
+        % end
+      </div>
+
+      <div class="relative h-1/2 bg-lightpurps rounded">
+        <div class="pl-4 pt-4 font-bold text-xl">Who to follow</div>
+        <!--  /////////////////////////////// Items * Following //////////////////////////////////// -->
+        % for item in items:
+        <div
+          class="flex items-center gap-2 px-3 py-3 hover:bg-gray-200 cursor-pointer"
+        >
+          <img
+            class="w-12 h-12 rounded-full flex-none"
+            src="/images/{{item['img']}}"
+          />
+          <div class="flex-1 overflow-ellipsis">
+            <p>{{item["title"]}}</p>
+            <p class="font-thin">@{{item["user_name"]}}</p>
+          </div>
+          <button class="py-2 px-4 bg-white rounded-full">Follow</button>
+        </div>
+        % end
+        <a href="" class="absolute bottom-0 self-end px-2 text-blue1">
+          Show more
+        </a>
+      </div>
+    </div>
   </div>
 </main>
 
