@@ -3,7 +3,7 @@
 % now = datetime.datetime.now()
 
 <main class="main-container w-full mx-auto">
-  <div class="pl-6">
+  <div class="">
     <div class="fixed h-screen px-1 lg:px-6 flex flex-col">
       <div class="">
         <!-- ? ///////////////////////// LEFT SIDE ////////////////////////////// -->
@@ -26,14 +26,14 @@
       </div>
       <div class="mt-44 relative z-10">
         <div
-          class="flex items-center gap-2 px-2 py-3 hover:bg-lightpurps cursor-pointer rounded-full"
+          class="flex items-center gap-2 px-2 py-3 hover:bg-lightpurps cursor-pointer rounded"
         >
-          <img class="w-12 h-12 rounded-full flex-none" src="/images/3.jpg" />
+          <img class="w-12 h-12 rounded flex-none" src="/images/alex1.png" />
           <div class="flex-1 overflow-ellipsis">
             <p>Alexandra Maracinaru</p>
             <p class="font-thin">@badget</p>
           </div>
-          <button class="more_btn bg-white">...</button>
+          <button class="more_btn bg-white rounded-md">...</button>
         </div>
       </div>
     </div>
@@ -101,7 +101,7 @@
             >{{ timeago.format(post["createdAt"], now) }}</span
           >
         </div>
-        <p class="tweet subtitle is-6 pl-6 pt-2">{{ post["tweet"] }}</p>
+        <p class="tweet subtitle is-6 pl-6 pt-2 mb-0">{{ post["tweet"] }}</p>
         <div class="post edit_delete flex justify-end">
           <a href="/edit/{{ post['post_id'] }}" class="edit_delete_btn">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -128,9 +128,9 @@
           </form>
         </div>
       </div>
-      % end
-      
       <div class="separator"></div>
+      % end
+
     </div>
   </div>
   <!-- ? /////////////////////////////// RIGHT SIDE //////////////////////////////////// -->
@@ -138,7 +138,7 @@
   <div class=" h-screen hidden lg:block">
     <div class=" fixed flex flex-col h-screen gap-4 pl-2">
       <!--  /////////////////////////////// TRENDS //////////////////////////////////// -->
-      <div class=" right_side_container h-1/2 flex-grow bg-lightpurps rounded overflow-hidden">
+      <div class=" right_side_container h-1/2 flex-grow bg-lightpurps rounded-lg overflow-hidden">
         <div class="pl-4 pt-4 font-bold text-xl">Trends for you</div>
         % for trend in trends:
         <div
@@ -154,22 +154,22 @@
         % end
       </div>
 
-      <div class="relative h-1/2 bg-lightpurps rounded">
+      <div class="relative h-1/2 bg-lightpurps rounded-lg">
         <div class="pl-4 pt-4 font-bold text-xl">Who to follow</div>
         <!--  /////////////////////////////// Items * Following //////////////////////////////////// -->
         % for item in items:
         <div
-          class="flex items-center gap-2 px-3 py-3 hover:bg-gray-200 cursor-pointer"
+          class="flex items-center gap-2 px-3 py-3 hover:bg-on_hover cursor-pointer"
         >
           <img
-            class="w-12 h-12 rounded-full flex-none"
+            class="w-12 h-12 rounded flex-none border-2 border-border"
             src="/images/{{item['img']}}"
           />
           <div class="flex-1 overflow-ellipsis">
             <p>{{item["title"]}}</p>
             <p class="font-thin">@{{item["user_name"]}}</p>
           </div>
-          <button class="py-2 px-4 bg-white rounded-full">Follow</button>
+          <button class="py-2 px-4 bg-white rounded-md">Follow</button>
         </div>
         % end
         <a href="" class="absolute bottom-0 self-end px-2 text-blue1">

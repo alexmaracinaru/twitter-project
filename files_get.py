@@ -63,3 +63,8 @@ def _():
 @get("/logo.svg")
 def _():
     return static_file("images/logo.svg", ".")
+
+
+@get("/images/<image_name>")
+def _(image_name):
+    return static_file(image_name, root="./images")

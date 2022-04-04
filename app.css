@@ -182,6 +182,7 @@ a svg {
 
 .separator {
   border-top: 1px solid var(--border);
+  margin-bottom: 40px;
 }
 .tweet {
   color: var(--text-color);
@@ -197,7 +198,6 @@ a svg {
   max-width: 1450px;
 }
 .more_btn {
-  border-radius: 50%;
   height: 30px;
   width: 30px;
   line-height: 30px;

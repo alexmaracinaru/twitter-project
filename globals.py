@@ -64,7 +64,9 @@ TWEETS = [
 ]
 
 ITEMS = [
-    {"img": "bbc.png", "title": "BBC News", "user_name": "bbcworld"},
-    {"img": "biden.jpg", "title": "Joe Biden", "user_name": "joebiden"},
-    {"img": "harris.jpg", "title": "Vice President", "user_name": "vp"},
+    {"img": "shapiro.jpg", "title": "Ben Shapiro", "user_name": "benshapiro"},
+    {"img": "peterson.jpg", "title": "Jordan B. Peterson",
+        "user_name": "jordanpeterson"},
+    {"img": "babylonbee.jpg", "title": "Babylon Bee",
+        "user_name": "babylonbee"},
 ]
