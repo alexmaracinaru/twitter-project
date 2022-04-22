@@ -34,6 +34,15 @@ TRENDS = [
     {"category": "Trending in US", "title": "Denim Day", "tweets_counter": "40k"},
     {"category": "News", "title": "Ukraine", "tweets_counter": "20k"},
     {"category": "Politics", "title": "Russia", "tweets_counter": "10k"},
+    {"category": "Trending in US", "title": "Denim Day", "tweets_counter": "40k"},
+    {"category": "Trending", "title": "Jesus", "tweets_counter": "10k"},
+    {"category": "Music", "title": "We Won", "tweets_counter": "135K"},
+    {"category": "Pop", "title": "Blue Ivy", "tweets_counter": "40k"},
+    {"category": "Trending in US", "title": "Denim Day", "tweets_counter": "40k"},
+    {"category": "News", "title": "Ukraine", "tweets_counter": "20k"},
+    {"category": "Politics", "title": "Russia", "tweets_counter": "10k"},
+    {"category": "Trending in US", "title": "Denim Day", "tweets_counter": "40k"},
+    {"category": "Trending", "title": "Jesus", "tweets_counter": "10k"},
 ]
 
 TWEETS = [

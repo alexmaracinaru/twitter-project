@@ -205,6 +205,14 @@ a svg {
   align-items: center;
   justify-content: center;
 }
-.right_side_container {
+.trends_container {
   width: 350px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 5px 57px rgba(74, 97, 233, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  position: sticky;
+  top: 0;
 }

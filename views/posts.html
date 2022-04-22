@@ -28,7 +28,7 @@
         <div
           class="flex items-center gap-2 px-2 py-3 hover:bg-lightpurps cursor-pointer rounded"
         >
-          <img class="w-12 h-12 rounded flex-none" src="/images/alex1.png" />
+          <img class="w-12 h-12 rounded flex-none border-2 border-border" src="/images/alex1.png" />
           <div class="flex-1 overflow-ellipsis">
             <p>Alexandra Maracinaru</p>
             <p class="font-thin">@badget</p>
@@ -52,12 +52,20 @@
           </figure>
         </div>
         <div class="w-full">
+          <label
+              for="txt-tweet"
+              class="w-full font-thin text-sm text-gray-400 pt-2 pl-4"
+              >1 to 300 characters</label
+            >
           <textarea
             name="tweet"
             type="textarea"
             class="textarea bg-transparent border-none"
             rows="2"
             placeholder="Write something..."
+            data-validate="str"
+            data-min="1"
+            data-max="300"
           ></textarea>
         </div>
       </div>
@@ -73,7 +81,7 @@
         Post
       </button>
     </form>
-    <!-- <img class="ellipse absolute" src="Ellipse20.png" alt=""/> -->
+     <img class="ellipse absolute" src="Ellipse20.png" alt=""/> 
 
     % if not posts:
     <div class="no_posts subtitle is-5 p-4">
@@ -113,7 +121,8 @@
             </svg>
           </a>
           <form action="/delete-post" method="POST">
-            <input name="post_id" type="hidden" value='{{ post["post_id"] }}' />
+            
+            <input name="post_id" type="hidden" value='{{ post["post_id"] }}'   />
             <div>
               <button class="edit_delete_btn">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -135,10 +144,10 @@
   </div>
   <!-- ? /////////////////////////////// RIGHT SIDE //////////////////////////////////// -->
 
-  <div class=" h-screen hidden lg:block">
-    <div class=" fixed flex flex-col h-screen gap-4 pl-2">
+  <div class="g h-screen hidden lg:block">
+    <div class="trends_follows flex flex-col h-screen gap-4 pl-2">
       <!--  /////////////////////////////// TRENDS //////////////////////////////////// -->
-      <div class=" right_side_container h-1/2 flex-grow bg-lightpurps rounded-lg overflow-hidden">
+      <div class="trends_container h-1/2 flex-grow bg-lightpurps rounded-lg overflow-hidden">
         <div class="pl-4 pt-4 font-bold text-xl">Trends for you</div>
         % for trend in trends:
         <div
@@ -154,7 +163,7 @@
         % end
       </div>
 
-      <div class="relative h-1/2 bg-lightpurps rounded-lg">
+      <div class=" relative h-1/2 bg-lightpurps rounded-lg">
         <div class="pl-4 pt-4 font-bold text-xl">Who to follow</div>
         <!--  /////////////////////////////// Items * Following //////////////////////////////////// -->
         % for item in items:
