@@ -13,12 +13,17 @@ def _():
     print(globals.SESSIONS)
 
     if user_session_id not in globals.SESSIONS:
-        return redirect("/login")
+        return dict(posts=globals.POSTS, tabs=globals.TABS, items=globals.ITEMS, trends=globals.TRENDS, people=globals.PEOPLE)
 
     user_id = request.get_cookie("user_id", secret=globals.COOKIE_SECRET)
 
+    userVariable = None
+
     for user in globals.USERS:
         if user["user_id"] == user_id:
-            return dict(posts=globals.POSTS, user=user, tabs=globals.TABS, items=globals.ITEMS, trends=globals.TRENDS, people=globals.PEOPLE, tweets=globals.TWEETS)
+            userVariable = user
 
-    return redirect('/login')
+    if (userVariable):
+        return dict(posts=globals.POSTS, user=user, tabs=globals.TABS, items=globals.ITEMS, trends=globals.TRENDS, people=globals.PEOPLE)
+    else:
+        return dict(posts=globals.POSTS, tabs=globals.TABS, items=globals.ITEMS, trends=globals.TRENDS, people=globals.PEOPLE)

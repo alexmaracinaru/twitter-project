@@ -1,54 +1,45 @@
-% include ("header", title="Posts") 
+% include ("header", title="Profile Page")
 % import datetime, timeago 
 % now = datetime.datetime.now()
 
 <main class="main-container w-full mx-auto">
   % include("navigation")
   <!-- ? //////////////////////////////////  CENTER  /////////////////////////////////////// -->
-  <div class="form_container ">
-    <form
-      class="form form-posts p-8 mt-0 relative z-10"
-      action="/posts"
-      method="post"
-    >
-      <div class="media flex flex-row">
-        <div class="media-left">
-          <figure class="image is-48x48">
-            <img src="/userpic.png" alt="Placeholder image" />
-          </figure>
-        </div>
-        <div class="w-full">
-          <label
-              for="txt-tweet"
-              class="w-full font-thin text-sm text-gray-400 pt-2 pl-4"
-              >1 to 300 characters</label
-            >
-          <textarea
-            name="tweet"
-            type="textarea"
-            class="textarea bg-transparent border-none"
-            rows="2"
-            placeholder="Write something..."
-            data-validate="str"
-            data-min="1"
-            data-max="300"
-          ></textarea>
+  <div class="form_container">
+    <div class="pb-2 profile_header flex items-center">
+      <a class="cursor-pointer" href="/posts">
+        <svg
+        class="mr-4"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="18"
+        height="18"
+      >
+        <path fill="none" d="M0 0h24v24H0z" />
+        <path
+          d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z"
+        />
+      </svg>
+      </a>
+      
+      <h2 class="font-bold text-xl">Alex Maracinaru</h2>
+    </div>
+
+    <div class="form form-posts mt-0 relative z-10">
+      <div class="profile_cover p-2"></div>
+      <div class="profile_container pb-6 flex">
+        <img class="profile_pic z-11" src="/images/alex1.png" alt="" />
+        <div class="profile_user pt-2">
+          <h3 class="font-bold">Alex Maracinaru</h3>
+          <span>@badget</span>
         </div>
       </div>
-      <div class="separator mt-4"></div>
-      <button class="fancy_button flex ml-auto mt-5 cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path
-            fill="currentColor"
-            d="M6.94 14.036c-.233.624-.43 1.2-.606 1.783.96-.697 2.101-1.139 3.418-1.304 2.513-.314 4.746-1.973 5.876-4.058l-1.456-1.455 1.413-1.415 1-1.001c.43-.43.915-1.224 1.428-2.368-5.593.867-9.018 4.292-11.074 9.818zM17 9.001L18 10c-1 3-4 6-8 6.5-2.669.334-4.336 2.167-5.002 5.5H3C4 16 6 2 21 2c-1 2.997-1.998 4.996-2.997 5.997L17 9.001z"
-          />
-        </svg>
-        Post
-      </button>
-    </form>
-     <img class="ellipse absolute" src="Ellipse20.png" alt=""/> 
-
+      <!-- <h4 class="p-4 ml-3">
+        I help create and launch socially responsible brands through research,
+        strategy and unconventional design solutions.
+      </h4> -->
+    </div>
+  <span class="text-xl font-bold pt-6  mb-0 block">Tweets</span>
     % if not posts:
     <div class="no_posts subtitle is-5 p-4">
       <strong>Sorry, you have no posts to show.</strong>
@@ -72,8 +63,7 @@
             </p>
           </div>
           <span class="tag is-link is-light"
-            >{{ timeago.format(post["createdAt"], now) }}</span
-          >
+            >{{ timeago.format(post["createdAt"], now) }}</span>
         </div>
         <p class="tweet subtitle is-6 pl-6 pt-2 mb-0">{{ post["tweet"] }}</p>
         <div class="post edit_delete flex justify-end">
@@ -87,8 +77,7 @@
             </svg>
           </a>
           <form action="/delete-post" method="POST">
-            
-            <input name="post_id" type="hidden" value='{{ post["post_id"] }}'   />
+            <input name="post_id" type="hidden" value='{{ post["post_id"] }}' />
             <div>
               <button class="edit_delete_btn">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -105,7 +94,6 @@
       </div>
       <div class="separator"></div>
       % end
-
     </div>
   </div>
   <!-- ? /////////////////////////////// RIGHT SIDE //////////////////////////////////// -->

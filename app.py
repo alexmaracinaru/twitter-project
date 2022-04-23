@@ -11,6 +11,7 @@ import signup_ok_get
 import posts_get
 import edit_get
 import logout_get
+import profile_get
 ##############################
 import login_post
 import signup_post

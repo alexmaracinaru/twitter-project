@@ -1,0 +1,45 @@
+<div class="g h-screen hidden lg:block">
+  <div class="trends_follows flex flex-col h-screen gap-4 pl-2">
+    <!--  /////////////////////////////// TRENDS //////////////////////////////////// -->
+    <div
+      class="trends_container h-1/2 flex-grow bg-lightpurps rounded-lg overflow-hidden"
+    >
+      <div class="pl-4 pt-4 font-bold text-xl">Trends for you</div>
+      % for trend in trends:
+      <div
+        class="flex justify-between px-4 py-4 hover:bg-on_hover cursor-pointer"
+      >
+        <div>
+          <p class="font-thin">{{trend["category"]}}</p>
+          <p class="font-bold">{{trend["title"]}}</p>
+          <p class="font-thin">{{trend["tweets_counter"]}} tweets</p>
+        </div>
+        <div>...</div>
+      </div>
+      % end
+    </div>
+
+    <div class="relative h-1/2 bg-lightpurps rounded-lg">
+      <div class="pl-4 pt-4 font-bold text-xl">Who to follow</div>
+      <!--  /////////////////////////////// Items * Following //////////////////////////////////// -->
+      % for item in items:
+      <div
+        class="flex items-center gap-2 px-3 py-3 hover:bg-on_hover cursor-pointer"
+      >
+        <img
+          class="w-12 h-12 rounded-full flex-none border-2 border-border"
+          src="/images/{{item['img']}}"
+        />
+        <div class="flex-1 overflow-ellipsis">
+          <p>{{item["title"]}}</p>
+          <p class="font-thin">@{{item["user_name"]}}</p>
+        </div>
+        <button class="py-2 px-4 bg-white rounded-md">Follow</button>
+      </div>
+      % end
+      <a href="" class="absolute bottom-0 self-end px-2 text-blue1">
+        Show more
+      </a>
+    </div>
+  </div>
+</div>

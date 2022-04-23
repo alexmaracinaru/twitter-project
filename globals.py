@@ -1,8 +1,56 @@
-USERS = [{"first_name": "Hard", "last_name": "Coded",
-          "user_email": "hard@coded.com", "user_password": "pass", "user_id": "123123123131231231232131", "username": "hardcoded"}, {"first_name": "John", "last_name": "Smith",
-                                                                                                                                     "user_email": "john@email.com", "user_password": "cat", "user_id": "131231312321123123123123", "username": "thesquiggle"}]
+import datetime
 
-POSTS = []
+USERS = [
+    {
+        "first_name": "Hard",
+        "last_name": "Coded",
+        "user_email": "hard@coded.com",
+        "user_password": "pass",
+        "user_id": "123123123131231231232131",
+        "username": "hardcoded"
+    },
+    {
+        "first_name": "John",
+        "last_name": "Smith",
+        "user_email": "john@email.com",
+        "user_password": "cat",
+        "user_id": "131231312321123123123123",
+        "username": "thesquiggle"
+    },
+    {
+        "first_name": "Alex",
+        "last_name": "Maracinaru",
+        "user_email": "alexandramaracinaru@gmail.com",
+        "user_password": "asdf",
+        "user_id": "123123123131231231232165",
+        "username": "badget"
+    },
+]
+
+
+time = datetime.datetime.now()
+
+POSTS = [
+    {
+        "first_name": "Hard",
+        "last_name": "Coded",
+        "username": "hardcoded",
+        "createdAt": time,
+        "tweet": "This is a hardcoded tweet",
+        "post_id": "1231578439201",
+        "formattedCreatedAt": time.strftime("%H:%M %d-%m-%Y"),
+    },
+    {
+        "first_name": "Hard",
+        "last_name": "Wood",
+        "username": "hardcoded",
+        "createdAt": time,
+        "tweet": "This is a teet",
+        "post_id": "123157843920123",
+        "formattedCreatedAt": time.strftime("%H:%M %d-%m-%Y"),
+    }
+
+]
 
 SESSIONS = []
 
@@ -43,33 +91,6 @@ TRENDS = [
     {"category": "Politics", "title": "Russia", "tweets_counter": "10k"},
     {"category": "Trending in US", "title": "Denim Day", "tweets_counter": "40k"},
     {"category": "Trending", "title": "Jesus", "tweets_counter": "10k"},
-]
-
-TWEETS = [
-    {"id": "1", "src": "6.jpg", "user_first_name": "Barack", "user_last_name": "Obama", "user_name": "barackobama", "date": "Feb 20",
-        "text": "The Ukrainian people need our help. If you're looking for a way to make a difference, here are some organizations doing important work.", "image": "1.jpg"},
-    {"id": "2", "src": "2.jpg", "user_first_name": "Elon", "user_last_name": "Musk", "user_name": "joebiden", "date": "Mar 3",
-     "text": "Richard Hunt is one of the greatest artists Chicago has ever produced, and I couldn't be prouder that his “Book Bird” sculpture will live outside of the newest @ChiPubLibbranch at the Obama Presidential Center. I hope it inspires visitors for years to come."},
-    {"id": "3", "src": "3.jpg", "user_first_name": "Joe Biden", "user_last_name": "Biden", "user_name": "elonmusk",
-     "date": "Mar 7", "text": "Last year has been the best year for manufacturing jobs and trucking jobs since 1994."},
-    {"id": "4", "src": "6.jpg", "user_first_name": "Barack", "user_last_name": "Obama", "user_name": "barackobama", "date": "Feb 20",
-     "text": "The Ukrainian people need our help. If you're looking for a way to make a difference, here are some organizations doing important work.", "image": "1.jpg"},
-    {"id": "5", "src": "2.jpg", "user_first_name": "Elon", "user_last_name": "Musk", "user_name": "joebiden", "date": "Mar 3",
-     "text": "Richard Hunt is one of the greatest artists Chicago has ever produced, and I couldn't be prouder that his “Book Bird” sculpture will live outside of the newest @ChiPubLibbranch at the Obama Presidential Center. I hope it inspires visitors for years to come."},
-    {"id": "6", "src": "3.jpg", "user_first_name": "Joe Biden", "user_last_name": "Biden", "user_name": "elonmusk",
-     "date": "Mar 7", "text": "Last year has been the best year for manufacturing jobs and trucking jobs since 1994."},
-    {"id": "7", "src": "6.jpg", "user_first_name": "Barack", "user_last_name": "Obama", "user_name": "barackobama", "date": "Feb 20",
-     "text": "The Ukrainian people need our help. If you're looking for a way to make a difference, here are some organizations doing important work.", "image": "1.jpg"},
-    {"id": "8", "src": "2.jpg", "user_first_name": "Elon", "user_last_name": "Musk", "user_name": "joebiden", "date": "Mar 3",
-     "text": "Richard Hunt is one of the greatest artists Chicago has ever produced, and I couldn't be prouder that his “Book Bird” sculpture will live outside of the newest @ChiPubLibbranch at the Obama Presidential Center. I hope it inspires visitors for years to come."},
-    {"id": "9", "src": "3.jpg", "user_first_name": "Joe Biden", "user_last_name": "Biden", "user_name": "elonmusk",
-     "date": "Mar 7", "text": "Last year has been the best year for manufacturing jobs and trucking jobs since 1994."},
-    {"id": "10", "src": "6.jpg", "user_first_name": "Barack", "user_last_name": "Obama", "user_name": "barackobama", "date": "Feb 20",
-     "text": "The Ukrainian people need our help. If you're looking for a way to make a difference, here are some organizations doing important work.", "image": "1.jpg"},
-    {"id": "11", "src": "2.jpg", "user_first_name": "Elon", "user_last_name": "Musk", "user_name": "joebiden", "date": "Mar 3",
-     "text": "Richard Hunt is one of the greatest artists Chicago has ever produced, and I couldn't be prouder that his “Book Bird” sculpture will live outside of the newest @ChiPubLibbranch at the Obama Presidential Center. I hope it inspires visitors for years to come."},
-    {"id": "12", "src": "3.jpg", "user_first_name": "Joe Biden", "user_last_name": "Biden", "user_name": "elonmusk",
-     "date": "Mar 7", "text": "Last year has been the best year for manufacturing jobs and trucking jobs since 1994."}
 ]
 
 ITEMS = [

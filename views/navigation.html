@@ -1,0 +1,43 @@
+<div class="nav-left">
+  <div class="fixed h-screen px-1 lg:px-6 flex flex-col">
+    <div class="">
+      <!-- ? ///////////////////////// LEFT SIDE ////////////////////////////// -->
+      <div class="">
+        % for tab in tabs:
+        <div class="mb-5">
+          <a class="text-lg hover:bg-lightpurps rounded-md py-2 px-4" href="">
+            <i class="{{tab['icon']}} text-purps"></i>
+            <span class="ml-2 hidden md:inline">{{tab['title']}}</span>
+          </a>
+        </div>
+        % end
+      </div>
+      <button
+        onclick="toggleTweetModal()"
+        class="mt-8 w-10/12 py-2 text-lg text-white bg-blue1 fancy_button"
+      >
+        Tweet
+      </button>
+    </div>
+    <!--  /////////////////////////////// Profile Info //////////////////////////////////// -->
+    % if get("user", False):
+    <div class="mt-6 relative z-10">
+      <div
+        class="flex items-center gap-2 px-2 py-3 hover:bg-lightpurps cursor-pointer rounded"
+      >
+        <img
+          class="w-12 h-12 rounded-full flex-none border-2 border-border"
+          src="/images/alex1.png"
+        />
+        <div class="flex-1 overflow-ellipsis">
+          <p class="corner_name">
+            {{ user["first_name"] }} {{ user["last_name"] }}
+          </p>
+          <p class="font-thin">@{{user["username"]}}</p>
+        </div>
+        <button class="more_btn bg-white rounded-md">...</button>
+      </div>
+    </div>
+    % end
+  </div>
+</div>
