@@ -2,15 +2,21 @@
 
 <main class="wrapper">
   <div class="form_wrapper">
-    <img class="hexagon_3d absolute" src="/3dhexagon.svg" alt="" />
+    <img class="absolute hexagon_3d" src="/3dhexagon.svg" alt="" />
     <img
-      class="circle_3d w-40 absolute -bottom-10 z-10"
+      class="absolute z-10 w-40 circle_3d -bottom-10"
       src="/3dcircle.svg"
       alt=""
     />
-    <img class="chat_bubble w-40 z-10 absolute" src="/chatty.png" alt="" />
+    <img class="absolute z-10 w-40 chat_bubble" src="/chatty.png" alt="" />
 
-    <form class="form p-6" action="/signup" method="post">
+    <form
+      class="p-6 form"
+      action="/signup"
+      method="post"
+      enctype="multipart/form-data"
+      onsubmit="return validate(this)"
+    >
       <h1 class="form_heading title is-1">Create your account</h1>
       <div class="field">
         <div class="control">
@@ -19,13 +25,30 @@
             name="first_name"
             type="text"
             placeholder="John"
+            data-validate="str"
+            data-min="2"
+            data-max="50"
           />
+          <span class="error hidden"
+            >First name must be between 2 and 50 characters</span
+          >
         </div>
       </div>
 
       <div class="field">
         <div class="control">
-          <input class="input" name="last_name" type="text" placeholder="Doe" />
+          <input
+            class="input"
+            name="last_name"
+            type="text"
+            placeholder="Doe"
+            data-validate="str"
+            data-min="2"
+            data-max="50"
+          />
+          <span class="error hidden"
+            >Last name must be between 2 and 50 characters</span
+          >
         </div>
       </div>
 
@@ -36,7 +59,30 @@
             name="username"
             type="text"
             placeholder="myusername"
+            data-validate="str"
+            data-min="2"
+            data-max="50"
           />
+          <span class="error hidden"
+            >Username must be between 2 and 50 characters</span
+          >
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input
+            class="input"
+            name="bio"
+            type="text"
+            placeholder="my bio"
+            data-validate="str"
+            data-min="0"
+            data-max="50"
+          />
+          <span class="error hidden"
+            >Bio must be between 6 and 50 characters</span
+          >
         </div>
       </div>
 
@@ -47,7 +93,9 @@
             name="user_email"
             type="text"
             placeholder="johndoe@email.com"
+            data-validate="email"
           />
+          <span class="error hidden">Not a valid email.</span>
         </div>
       </div>
 
@@ -58,9 +106,27 @@
             name="user_password"
             type="password"
             placeholder="Password"
+            data-validate="str"
+            data-min="3"
+            data-max="50"
+          />
+          <span class="error hidden"
+            >Password must be between 3 and 50 characters</span
+          >
+        </div>
+      </div>
+
+      <div class="field image">
+        <div class="control">
+          <input
+            type="file"
+            id="my_picture"
+            name="my_picture"
+            accept="image/*"
           />
         </div>
       </div>
+
       <div class="field button_checkbox">
         <div class="control">
           <button class="fancy_button">Sign up</button>
@@ -68,8 +134,8 @@
       </div>
     </form>
   </div>
-  <div class="login_container text-center pt-4">
-    <span class="login_question m-auto text-center"
+  <div class="pt-4 text-center login_container">
+    <span class="m-auto text-center login_question"
       >Do you already have an account?</span
     >
     <a class="login_here" href="/login">Login here</a>

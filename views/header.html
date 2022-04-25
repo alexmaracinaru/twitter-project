@@ -4,38 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/c884ab5724.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="/app.css" />
     <link rel="stylesheet" href="/tailwind.css" />
     <title>{{ get("title", "upps...") }}</title>
   </head>
   <body>
-    <header class="flex justify-between items-center p-7">
+    <header class="flex items-center justify-between p-7">
       <a href="/signup">
         <img class="logo" src="/logo.svg" alt="black hexagon"
       /></a>
       <nav class="flex items-center">
-        <a class="nav_link p-2" href="/posts">Posts</a>
-        <a class="nav_link p-2" href="/users">Users</a>
+        <a class="p-2 nav_link" href="/posts">Posts</a>
+        % if get("user", False) and user["username"] == "admin":
+        <a class="p-2 nav_link" href="/admin">Admin</a>
+        % end
         % if get("user", False):
-        <div class="user_logout flex items-center p-2 ">
-          <span class="user_greeting is-5 pr-2">
+        <div class="flex items-center p-2 user_logout ">
+          <a class="flex items-center" href="/profile/{{user['username'] }}">
+          <span class="pr-2 user_greeting is-5">
             Hi, {{ user["first_name"] }}!
           </span>
-          <figure class="image is-32x32">
-            <a href="/profile">
-              <img class="rounded-full" src="images/alex1.png" alt="Placeholder image" />
+              <img class="rounded-full w-10 h-10 object-cover" src="images/pictures/{{ user['picture'] }}" alt="Placeholder image" onerror="this.src='/images/userpic.png'"/>
             </a>
-           
-          </figure>
-          <a class="button ml-2 signup_btn" href="/logout">Log out</a>
+          <a class="ml-2 button signup_btn" href="/logout">Log out</a>
         </div>
         % else:
         <a class="button signup_btn" href="/signup">Sign up</a>
-        <a class="button login_btn ml-2" href="/login">Login</a>
+        <a class="ml-2 button login_btn" href="/login">Login</a>
         % end
       </nav>
     </header>

@@ -4,7 +4,7 @@ import globals
 ##############################
 import index_get
 import signup_get
-import users_get
+import admin_get
 import login_get
 import files_get
 import signup_ok_get
@@ -31,6 +31,11 @@ def _():
 @get("/tailwind.css")
 def _():
     return static_file("tailwind.css", ".")
+
+
+@get("/validator.js")
+def _():
+    return static_file("validator.js", ".")
 
 
 ##############################

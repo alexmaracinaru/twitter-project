@@ -1,4 +1,5 @@
 import datetime
+from bottle import request
 
 USERS = [
     {
@@ -7,7 +8,8 @@ USERS = [
         "user_email": "hard@coded.com",
         "user_password": "pass",
         "user_id": "123123123131231231232131",
-        "username": "hardcoded"
+        "username": "hardcoded",
+        "card_post": "My grandmother started walking five miles a day when she was sixty. She's ninety-seven now, and we don't know where the hell she is. My grandmother started walking five miles a day when she was sixty. She's ninety-seven now, and we don't know where the hell she is. My grandmother started walking."
     },
     {
         "first_name": "John",
@@ -15,7 +17,8 @@ USERS = [
         "user_email": "john@email.com",
         "user_password": "cat",
         "user_id": "131231312321123123123123",
-        "username": "thesquiggle"
+        "username": "thesquiggle",
+        "card_post": "This is the text that comes from the second user."
     },
     {
         "first_name": "Alex",
@@ -23,7 +26,17 @@ USERS = [
         "user_email": "alexandramaracinaru@gmail.com",
         "user_password": "asdf",
         "user_id": "123123123131231231232165",
-        "username": "badget"
+        "username": "badget",
+        "card_post": "This is the text that comes from the  third user."
+    },
+    {
+        "first_name": "Alex",
+        "last_name": "Maracinaru",
+        "user_email": "alexandramaracinaru@gmail.com",
+        "user_password": "asdf",
+        "user_id": "123123123131231231232165",
+        "username": "badget",
+        "card_post": "This is the text that comes from the  third user."
     },
 ]
 
@@ -35,7 +48,7 @@ POSTS = [
         "first_name": "Hard",
         "last_name": "Coded",
         "username": "hardcoded",
-        "createdAt": time,
+        "created_at": time,
         "tweet": "This is a hardcoded tweet",
         "post_id": "1231578439201",
         "formattedCreatedAt": time.strftime("%H:%M %d-%m-%Y"),
@@ -44,7 +57,7 @@ POSTS = [
         "first_name": "Hard",
         "last_name": "Wood",
         "username": "hardcoded",
-        "createdAt": time,
+        "created_at": time,
         "tweet": "This is a teet",
         "post_id": "123157843920123",
         "formattedCreatedAt": time.strftime("%H:%M %d-%m-%Y"),
@@ -59,38 +72,22 @@ COOKIE_SECRET = "cookie secret"
 REGEX_EMAIL = '^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
 
 TABS = [
-    {"icon": "fas fa-home fa-fw", "title": "Home", "id": "home"},
-    {"icon": "fas fa-hashtag fa-fw", "title": "Explore", "id": "explore"},
-    {"icon": "far fa-bell fa-fw", "title": "Notifications", "id": "notifications"},
-    {"icon": "far fa-envelope fa-fw", "title": "Messages", "id": "messages"},
-    {"icon": "far fa-bookmark fa-fw", "title": "Bookmarks", "id": "bookmarks"},
-    {"icon": "fas fa-clipboard-list fa-fw", "title": "Lists", "id": "lists"},
-    {"icon": "far fa-user fa-fw", "title": "Profile", "id": "profile"},
-    {"icon": "fas fa-ellipsis-h fa-fw", "title": "More", "id": "more"}
+    {"icon": "ri-home-line", "title": "Home", "id": "home"},
+    {"icon": "ri-hashtag", "title": "Explore", "id": "explore"},
+    {"icon": "ri-notification-line", "title": "Notifications", "id": "notifications"},
+    {"icon": "ri-message-3-line", "title": "Messages", "id": "messages"},
+    {"icon": "ri-bookmark-line", "title": "Bookmarks", "id": "bookmarks"},
+    {"icon": "ri-file-list-2-line", "title": "Lists", "id": "lists"},
+    {"icon": "ri-user-5-line", "title": "Profile", "id": "profile"},
+    {"icon": "ri-more-line", "title": "More", "id": "more"}
 ]
 
-
-PEOPLE = [
-    {"src": "stephie.png", "name": "Stephie Jensen", "handle": "@sjensen"},
-    {"src": "monk.jpg", "name": "Adrian Monk", "handle": "@detective :)"},
-    {"src": "kevin.jpg", "name": "Kevin Hart", "handle": "@miniRock"}
-]
 
 TRENDS = [
-    {"category": "Music", "title": "We Won", "tweets_counter": "135K"},
-    {"category": "Pop", "title": "Blue Ivy", "tweets_counter": "40k"},
+    {"category": "Trending in Denmark", "title": "Lost", "tweets_counter": "135K"},
     {"category": "Trending in US", "title": "Denim Day", "tweets_counter": "40k"},
-    {"category": "News", "title": "Ukraine", "tweets_counter": "20k"},
-    {"category": "Politics", "title": "Russia", "tweets_counter": "10k"},
-    {"category": "Trending in US", "title": "Denim Day", "tweets_counter": "40k"},
-    {"category": "Trending", "title": "Jesus", "tweets_counter": "10k"},
-    {"category": "Music", "title": "We Won", "tweets_counter": "135K"},
-    {"category": "Pop", "title": "Blue Ivy", "tweets_counter": "40k"},
-    {"category": "Trending in US", "title": "Denim Day", "tweets_counter": "40k"},
-    {"category": "News", "title": "Ukraine", "tweets_counter": "20k"},
-    {"category": "Politics", "title": "Russia", "tweets_counter": "10k"},
-    {"category": "Trending in US", "title": "Denim Day", "tweets_counter": "40k"},
-    {"category": "Trending", "title": "Jesus", "tweets_counter": "10k"},
+    {"category": "Sports", "title": "Hamilton", "tweets_counter": "120k"},
+    {"category": "Always Trending", "title": "Jesus", "tweets_counter": "1m"},
 ]
 
 ITEMS = [
@@ -100,3 +97,21 @@ ITEMS = [
     {"img": "babylonbee.jpg", "title": "Babylon Bee",
         "user_name": "babylonbee"},
 ]
+
+
+def create_json_from_sqlite_result(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
+
+def check_session():
+    user_session_id = request.get_cookie("uuid4")
+    # compare the uuid from the cookie to the uuid from the sessions
+
+    for session in SESSIONS:
+        if session["session_id"] == user_session_id:
+            return session
+
+    return None

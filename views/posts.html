@@ -2,41 +2,40 @@
 % import datetime, timeago 
 % now = datetime.datetime.now()
 
-<main class="main-container w-full mx-auto">
+<main class="w-full mx-auto main-container">
   % include("navigation")
   <!-- ? //////////////////////////////////  CENTER  /////////////////////////////////////// -->
   <div class="form_container ">
     <form
-      class="form form-posts p-8 mt-0 relative z-10"
+      class="relative z-10 p-8 mt-0 form form-posts"
       action="/posts"
       method="post"
+      onsubmit="return validate(this)"
     >
-      <div class="media flex flex-row">
+      <div class="flex flex-row media">
         <div class="media-left">
           <figure class="image is-48x48">
             <img src="/userpic.png" alt="Placeholder image" />
           </figure>
         </div>
         <div class="w-full">
-          <label
-              for="txt-tweet"
-              class="w-full font-thin text-sm text-gray-400 pt-2 pl-4"
-              >1 to 300 characters</label
-            >
           <textarea
-            name="tweet"
+            name="text"
             type="textarea"
-            class="textarea bg-transparent border-none"
+            class="bg-transparent border-none textarea"
             rows="2"
             placeholder="Write something..."
             data-validate="str"
             data-min="1"
             data-max="300"
           ></textarea>
+          <span class="error hidden"
+            >Post must be between 1 and 300 characters</span
+          >
         </div>
       </div>
-      <div class="separator mt-4"></div>
-      <button class="fancy_button flex ml-auto mt-5 cursor-pointer">
+      <div class="mt-4 separator"></div>
+      <button class="flex mt-5 ml-auto cursor-pointer fancy_button">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path fill="none" d="M0 0h24v24H0z" />
           <path
@@ -47,21 +46,26 @@
         Post
       </button>
     </form>
-     <img class="ellipse absolute" src="Ellipse20.png" alt=""/> 
+     <img class="absolute ellipse" src="Ellipse20.png" alt=""/> 
 
     % if not posts:
-    <div class="no_posts subtitle is-5 p-4">
+    <div class="p-4 no_posts subtitle is-5">
       <strong>Sorry, you have no posts to show.</strong>
     </div>
     % end
-    <div id="posts" class="form form_posts p-6 mt-2">
+
+
+  <!-- ? //////////////////////////////////  When Posts  /////////////////////////////////////// -->
+
+    <div id="posts" class="p-6 mt-2 form form_posts">
       % for post in posts:
       <div class="post">
         <div class="media">
           <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="/userpic.png" alt="Placeholder image" />
-            </figure>
+              <img class="w-12 h-12 object-cover rounded-full"
+              src="/images/pictures/{{post['picture']}}"
+              alt="Placeholder image"
+              onerror="this.src='/images/userpic.png'" />
           </div>
           <div class="media-content">
             <p class="title is-6 text-purps">
@@ -72,12 +76,14 @@
             </p>
           </div>
           <span class="tag is-link is-light"
-            >{{ timeago.format(post["createdAt"], now) }}</span
+            >{{ timeago.format(int(post["created_at"]), now) }}</span
           >
         </div>
-        <p class="tweet subtitle is-6 pl-6 pt-2 mb-0">{{ post["tweet"] }}</p>
-        <div class="post edit_delete flex justify-end">
-          <a href="/edit/{{ post['post_id'] }}" class="edit_delete_btn">
+        <p class="pt-2 pl-6 pb-2 mb-0 tweet subtitle is-6">{{ post["text"] }}</p>
+
+        % if get("user", False) and user["username"] == post["username"]:
+        <div class="flex justify-end post edit_delete">
+          <a href="/edit/{{ post['id'] }}" class="edit_delete_btn">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path fill="none" d="M0 0h24v24H0z" />
               <path
@@ -87,8 +93,7 @@
             </svg>
           </a>
           <form action="/delete-post" method="POST">
-            
-            <input name="post_id" type="hidden" value='{{ post["post_id"] }}'   />
+            <input name="post_id" type="hidden" value='{{ post["id"] }}' />
             <div>
               <button class="edit_delete_btn">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -102,6 +107,7 @@
             </div>
           </form>
         </div>
+        % end
       </div>
       <div class="separator"></div>
       % end

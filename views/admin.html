@@ -1,0 +1,55 @@
+%include ("header", title = "Admin")
+
+<main class="wrapper max-w-screen-2xl">
+  % if not users:
+  <div>Sorry, no users to show.</div>
+
+  % end
+
+  <div id="users" class="cards grid grid-cols-3">
+    % for user in users:
+    <div class="user card p-6 m-3">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img
+                class="rounded-full"
+                src="/userpic.png"
+                alt="Placeholder image"
+              />
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-6">
+              {{ user["first_name"] }}<br />{{ user["last_name"] }}
+            </p>
+            <p class="subtitle is-6">@{{ user["username"] }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer flex flex-col pt-4">
+        <div class="subtitle text-sm">Email: {{ user["email"] }}</div>
+        <span class="tag is-link is-light">User ID: {{ user["id"] }}</span>
+      </div>
+      % for post in list(filter(lambda p: p['user_id'] == user["id"], posts)):
+      <div class="card-texts flex flex-col">
+        <div
+          class="card_text flex items-center p-4 mt-2 bg-lightpurps justify-between"
+        >
+          <p class="text-xs pr-2">{{ post["text"] }}</p>
+          <form action="/delete-post?admin=true" method="POST">
+            <input name="post_id" type="hidden" value="{{ post['id'] }}" />
+            <button>
+              <i class="ri-delete-bin-7-line"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      % end
+    </div>
+
+    % end
+  </div>
+</main>
+%include("footer")

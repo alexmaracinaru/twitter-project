@@ -1,41 +1,46 @@
-from bottle import get, redirect, request, post, view
+from bottle import get, redirect, post, request, response, view
 import globals
-import timeago
 import datetime
-import uuid
-
+import sqlite3
 ##############################
 
 # posts = [] has been replaced with globals.POSTS
 
 ##############################
 
+sql_post = """
+    INSERT INTO posts (text, created_at, user_id) VALUES (?, ?, ?)
+"""
+
 
 @post("/posts")
 def _():
-    user_session_id = request.get_cookie("uuid4")
-    # compare the uuid from the cookie to the uuid from the sessions
-    if user_session_id not in globals.SESSIONS:
-        return redirect("/login")
-    user_id = request.get_cookie("user_id", secret=globals.COOKIE_SECRET)
+    user_session = globals.check_session()
+
+    if (not user_session):
+        return redirect('/login')
+    if len(request.forms.get("text")) < 1:
+        response.status = 400
+        return "Your post must be at least 1 character(s) long"
+    if len(request.forms.get("text")) > 300:
+        response.status = 400
+        return "Your post must be less than 300 characters"
 
     time = datetime.datetime.now()
-    for user in globals.USERS:
-        if user["user_id"] == user_id:
 
-            tweet = request.forms.get("tweet")
-            post_id = str(uuid.uuid4())
-            post = {
-                "first_name": user["first_name"],
-                "last_name": user["last_name"],
-                "username": user["username"],
-                "createdAt": time,
-                "tweet": tweet,
-                "post_id": post_id,
-                "formattedCreatedAt": time.strftime("%H:%M %d-%m-%Y")
-            }
-            globals.POSTS.append(post)
+    text = request.forms.get("text")
+    time = int(datetime.datetime.now().timestamp())
+    try:
+        connection = sqlite3.connect("./database.sqlite")
+        connection.row_factory = globals.create_json_from_sqlite_result
+        cursor = connection.cursor()
+        cursor.execute(sql_post, (text, time, user_session["user_id"]))
 
-            return redirect('/posts')
+        connection.commit()
 
-    return "something went wrong"
+        connection.close()
+
+    except:
+        print("Error in database")
+
+    return redirect('/posts')

@@ -1,12 +1,12 @@
 % include("header", title="Edit")
 
-<main class="main_post wrapper m-auto">
+<main class="m-auto main_post wrapper">
   <form
-    class="form form_posts p-8 mt-0 relative z-10"
-    action="/edit"
+    class="relative z-10 p-8 mt-0 form form_posts"
+    action="/edit/{{ post['id'] }}"
     method="post"
   >
-    <div class="media flex flex-row">
+    <div class="flex flex-row media">
       <div class="media-left">
         <figure class="image is-48x48">
           <img src="/userpic.png" alt="Placeholder image" />
@@ -14,19 +14,19 @@
       </div>
       <div class="w-full">
         <textarea
-          class="textarea bg-transparent border-none"
-          name="tweet"
+          class="bg-transparent border-none textarea"
+          name="text"
           type="textarea"
           rows="2"
         >
-          {{ post['tweet'] }}</textarea
+          {{ post['text'] }}</textarea
         >
       </div>
 
-      <input name="post_id" type="hidden" value='{{ post["post_id"] }}' />
+      <input name="post_id" type="hidden" value='{{ post["id"] }}' />
     </div>
     <div class="mt-6 separator"></div>
-    <button class="fancy_button flex ml-auto mt-5 cursor-pointer">
+    <button class="flex mt-5 ml-auto cursor-pointer fancy_button">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path fill="none" d="M0 0h24v24H0z" />
         <path

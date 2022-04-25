@@ -1,15 +1,27 @@
 from bottle import post, view, redirect, request
 import globals
+import sqlite3
 
 
-@post("/edit")
-def _():
-    post_id = request.forms.get("post_id")
-    for index, post in enumerate(globals.POSTS):
-        if post["post_id"] == post_id:
-            new_value = {"tweet": request.forms.get("tweet")}
+@post("/edit/<post_id>")
+def _(post_id):
+    text = request.forms.get("text")
+    user_session = globals.check_session()
 
-            post.update(new_value)
+    if (not user_session):
+        return redirect('/login')
 
-            return redirect('/posts')
+    try:
+        connection = sqlite3.connect("./database.sqlite")
+        cursor = connection.cursor()
+        cursor.execute("UPDATE posts SET text = ? WHERE id = ? AND user_id = ?;",
+                       (text, post_id, user_session["user_id"]))
+
+        connection.commit()
+    except Exception as ex:
+        print(ex)
+        print("Error in database")
+    finally:
+        connection.close()
+
     return redirect('/posts')

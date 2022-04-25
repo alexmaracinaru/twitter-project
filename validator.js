@@ -1,11 +1,21 @@
+function _all(q, e = document) {
+  return e.querySelectorAll(q);
+}
+function _one(q, e = document) {
+  return e.querySelector(q);
+}
+
+console.log("burv");
+const submitLoginForm = (form) => {
+  form.submit();
+};
 // ##############################
-function validate(callback) {
-  const form = event.target;
+function validate(form, callback = null) {
+  console.log("validating");
   console.log(form);
-  const validate_error = "rgba(240, 130, 240, 0.2)";
+  let error = false;
   _all("[data-validate]", form).forEach(function (element) {
     element.classList.remove("validate_error");
-    element.style.backgroundColor = "white";
   });
   _all("[data-validate]", form).forEach(function (element) {
     switch (element.getAttribute("data-validate")) {
@@ -15,7 +25,7 @@ function validate(callback) {
           element.value.length > parseInt(element.getAttribute("data-max"))
         ) {
           element.classList.add("validate_error");
-          element.style.backgroundColor = validate_error;
+          error = true;
         }
         break;
       case "int":
@@ -26,7 +36,7 @@ function validate(callback) {
           parseInt(element.value) > parseInt(element.getAttribute("data-max"))
         ) {
           element.classList.add("validate_error");
-          element.style.backgroundColor = validate_error;
+          error = true;
         }
         break;
       case "email":
@@ -34,7 +44,7 @@ function validate(callback) {
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!re.test(element.value.toLowerCase())) {
           element.classList.add("validate_error");
-          element.style.backgroundColor = validate_error;
+          error = true;
         }
         break;
       case "re":
@@ -42,7 +52,7 @@ function validate(callback) {
         if (!regex.test(element.value)) {
           console.log("phone error");
           element.classList.add("validate_error");
-          element.style.backgroundColor = validate_error;
+          error = true;
         }
         break;
       case "match":
@@ -52,14 +62,17 @@ function validate(callback) {
             .value
         ) {
           element.classList.add("validate_error");
-          element.style.backgroundColor = validate_error;
+          error = true;
         }
         break;
     }
   });
+  if (error) {
+    return false;
+  }
   if (!_one(".validate_error", form)) {
-    callback();
-    return;
+    callback && callback(form);
+    return true;
   }
   // _one(".validate_error", form).focus()
 }

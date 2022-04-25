@@ -1,21 +1,36 @@
 from bottle import get, view, request, redirect
 import globals
+import sqlite3
+
+
+query_get_profile_posts = """
+    SELECT posts.*, users.username, users.id, users.first_name, users.last_name, users.bio, users.picture
+    FROM users JOIN posts WHERE users.id = posts.user_id AND users.username = ?
+"""
+
+query_get_profile = """
+    SELECT users.username, users.id, users.first_name, users.last_name, users.bio, users.picture
+    FROM users WHERE users.username = ?
+"""
 
 
 ##############################
-@get("/profile")
+@get("/profile/<username>")
 @view("profile")
-def _():
-    user_session_id = request.get_cookie("uuid4")
-    # compare the uuid from the cookie to the uuid from the sessions
+def _(username):
+    user_session = globals.check_session()
 
-    if user_session_id not in globals.SESSIONS:
-        return redirect("/login")
+    connection = sqlite3.connect("./database.sqlite")
+    connection.row_factory = globals.create_json_from_sqlite_result
+    cursor = connection.cursor()
 
-    user_id = request.get_cookie("user_id", secret=globals.COOKIE_SECRET)
+    try:
+        profile = cursor.execute(query_get_profile, (username,)).fetchone()
 
-    for user in globals.USERS:
-        if user["user_id"] == user_id:
-            return dict(posts=globals.POSTS, user=user, tabs=globals.TABS, items=globals.ITEMS, trends=globals.TRENDS, people=globals.PEOPLE, tweets=globals.TWEETS)
+        posts = cursor.execute(query_get_profile_posts, (username,)).fetchall()
+
+        return dict(posts=posts, user=user_session["user"], tabs=globals.TABS, items=globals.ITEMS, trends=globals.TRENDS, profile=profile)
+    except:
+        print("err")
 
     return redirect('/login')

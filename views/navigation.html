@@ -22,21 +22,24 @@
     <!--  /////////////////////////////// Profile Info //////////////////////////////////// -->
     % if get("user", False):
     <div class="mt-6 relative z-10">
-      <div
-        class="flex items-center gap-2 px-2 py-3 hover:bg-lightpurps cursor-pointer rounded"
-      >
-        <img
-          class="w-12 h-12 rounded-full flex-none border-2 border-border"
-          src="/images/alex1.png"
-        />
-        <div class="flex-1 overflow-ellipsis">
-          <p class="corner_name">
-            {{ user["first_name"] }} {{ user["last_name"] }}
-          </p>
-          <p class="font-thin">@{{user["username"]}}</p>
+      <a href="./profile/{{user['username']}}">
+        <div
+          class="flex items-center gap-2 px-2 py-3 hover:bg-lightpurps cursor-pointer rounded"
+        >
+          <img
+            class="w-12 h-12 object-cover rounded-full flex-none border-2 border-border"
+            src="/images/pictures/{{user['picture']}}"
+            onerror="this.src='/images/userpic.png'"
+          />
+          <div class="flex-1 overflow-ellipsis">
+            <p class="corner_name">
+              {{ user["first_name"] }} {{ user["last_name"] }}
+            </p>
+            <p class="font-thin">@{{user["username"]}}</p>
+          </div>
+          <button class="more_btn bg-white rounded-md">...</button>
         </div>
-        <button class="more_btn bg-white rounded-md">...</button>
-      </div>
+      </a>
     </div>
     % end
   </div>

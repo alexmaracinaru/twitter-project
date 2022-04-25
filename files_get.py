@@ -68,3 +68,8 @@ def _():
 @get("/images/<image_name>")
 def _(image_name):
     return static_file(image_name, root="./images")
+
+
+@get("/images/pictures/<image_name>")
+def _(image_name):
+    return static_file(image_name, root="./images/pictures")
