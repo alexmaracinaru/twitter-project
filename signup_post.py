@@ -94,7 +94,7 @@ def _():
         return "Bad image"
 
     try:
-        connection = sqlite3.connect("./database.sqlite")
+        connection = sqlite3.connect(globals.DB_PATH)
         connection.row_factory = globals.create_json_from_sqlite_result
         cursor = connection.cursor()
         cursor.execute(sql_signup, (first_name, last_name,

@@ -12,7 +12,7 @@ query_get_profile_posts = """
 @get("/admin")
 @view("admin")
 def _():
-    connection = sqlite3.connect("./database.sqlite")
+    connection = sqlite3.connect(globals.DB_PATH)
     connection.row_factory = globals.create_json_from_sqlite_result
     cursor = connection.cursor()
 

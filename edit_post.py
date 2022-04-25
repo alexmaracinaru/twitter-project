@@ -12,7 +12,7 @@ def _(post_id):
         return redirect('/login')
 
     try:
-        connection = sqlite3.connect("./database.sqlite")
+        connection = sqlite3.connect(globals.DB_PATH)
         cursor = connection.cursor()
         cursor.execute("UPDATE posts SET text = ? WHERE id = ? AND user_id = ?;",
                        (text, post_id, user_session["user_id"]))

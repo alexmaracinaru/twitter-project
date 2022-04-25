@@ -17,7 +17,7 @@ def _():
     user = None
 
     try:
-        connection = sqlite3.connect("./database.sqlite")
+        connection = sqlite3.connect(globals.DB_PATH)
         connection.row_factory = globals.create_json_from_sqlite_result
         cursor = connection.cursor()
         user = cursor.execute(sql_login, (username, user_password)).fetchone()

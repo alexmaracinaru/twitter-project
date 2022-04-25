@@ -1,6 +1,8 @@
 import datetime
 from bottle import request
 
+DB_PATH = "./database.sqlite"
+
 USERS = [
     {
         "first_name": "Hard",
