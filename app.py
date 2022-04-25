@@ -1,4 +1,4 @@
-from bottle import error, get, post, redirect, request, run, static_file, view
+from bottle import default_app, error, get, post, redirect, request, run, static_file, view
 
 import globals
 ##############################
@@ -46,4 +46,8 @@ def _(error):
     return
 
 
-run(host="127.0.0.1", port=3333, debug=True, reloader="True")
+try:
+    import production
+    application = default_app()
+except Exception as ex:
+    run(host="127.0.0.1", port=3333, debug=True, reloader="True")
